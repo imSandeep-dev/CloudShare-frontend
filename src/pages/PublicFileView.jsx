@@ -35,23 +35,30 @@ const PublicFileView = () => {
         getFile()
     },[fileId,getToken])
 
-    const handleDownload = async () => {
-        try {
-            const token = await getToken()
-            const response=await axios.get(apiEndpoints.DOWNLOAD_FILE(fileId),{headers:{Authorization:`Bearer ${token}`},responseType:'blob'})
-            const url=window.URL.createObjectURL(new Blob([response.data]))
-            const link=document.createElement("a")
-            link.href = url
-            link.setAttribute("download",file.name)
-            document.body.appendChild(link)
-            link.click()
-            link.remove()
-            window.URL.revokeObjectURL(url)
-        } catch (error) {
-            console.error("Error downloading the file",error)
-            toast.error("Error downloading the file",error.message)
-        }
+    const handleDownload = async (file) => {
+    try {
+        const token = await getToken()
+        const response = await axios.get(apiEndpoints.DOWNLOAD_FILE(file.id), {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        const cloudinaryUrl = response.data.url
+
+        const fileResponse = await fetch(cloudinaryUrl)
+        const blob = await fileResponse.blob()
+        
+        const blobUrl = window.URL.createObjectURL(blob)
+        const link = document.createElement("a")
+        link.href = blobUrl
+        link.setAttribute("download", file.name)
+        document.body.appendChild(link)
+        link.click()
+        link.remove()
+        window.URL.revokeObjectURL(blobUrl)
+    } catch (error) {
+        console.error("Error downloading file: ", error)
+        toast.error("Error downloading file")
     }
+}
 
     const openShareModal = () => {
         setShareModal({
@@ -129,7 +136,7 @@ const PublicFileView = () => {
                             </div>
                             <div className="flex justify-center gap-4 my-8">
                                 <button 
-                                    onClick={() => handleDownload()}
+                                    onClick={() => handleDownload(file)}
                                     className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                 >
                                     <Download size={16} />
