@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+*{
+    font-family: 'urbanist', sans-serif;
+}
+
+/* .landing-page {
+    min-height: 10vh;
+    background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+    padding: 2rem;
+    text-align: center;
+}
+
+.landing-page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh; 
+}*/
