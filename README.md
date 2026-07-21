@@ -87,6 +87,3 @@ src/
 
 Make sure the backend is running and `REACT_APP_API_BASE_URL` in your `.env` matches its address. CORS must be configured on the backend to allow requests from the frontend's origin (`localhost:3000` in dev, your Netlify domain in production).
 
-## License
-
-This project is for portfolio/educational purposes.
