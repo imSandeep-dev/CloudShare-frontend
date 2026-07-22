@@ -1,5 +1,5 @@
 // const BASE_URL="http://localhost:8080/api"
-const BASE_URL="https://cloudshare-backend-production-25d5.up.railway.app/api"
+const BASE_URL="https://cloudshare-backend-production-32b6.up.railway.app"
 
 export const apiEndpoints = {
     FETCH_FILES:`${BASE_URL}/files/my`,
